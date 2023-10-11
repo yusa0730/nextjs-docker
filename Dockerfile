@@ -23,9 +23,9 @@ FROM base as deps
 # Leverage bind mounts to package.json and yarn.lock to avoid having to copy them
 # into this layer.
 RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --production --frozen-lockfile
+    --mount=type=bind,source=yarn.lock,target=yarn.lock \
+    --mount=type=cache,target=/root/.yarn \
+    yarn install --frozen-lockfile --production
 
 ################################################################################
 # Create a stage for building the application.
@@ -34,7 +34,7 @@ FROM deps as build
 # Copy the rest of the source files into the image.
 COPY . .
 # Run the build script.
-RUN npm run build
+RUN yarn build
 
 ################################################################################
 # Create a new stage to run the application with minimal runtime dependencies
@@ -49,6 +49,7 @@ USER node
 
 # Copy package.json so that package manager commands can be used.
 COPY package.json .
+COPY yarn.lock .
 
 COPY ./public ./public
 
@@ -58,6 +59,6 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/.next ./.next
 
 # Run the application.
-CMD npm start
+CMD yarn start
 
 EXPOSE 3000
