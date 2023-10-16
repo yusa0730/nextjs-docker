@@ -97,7 +97,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -200,6 +200,10 @@
     );
     z-index: 1;
   }
+}
+
+.callApiButton {
+  padding: 10px;
 }
 
 /* Tablet and Smaller Desktop */
