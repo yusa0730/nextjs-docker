@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./page.module.css";
+import styles from "./call-sample-api-button.module.css";
 
 export function CallSampleAPIButton() {
   const callSampleApi = async () => {
-    const response = await fetch("/api/sample");
+    const response = await fetch(`/api/sample`);
     const data = await response.json();
     console.log(data);
   };

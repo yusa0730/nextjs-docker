@@ -11,7 +11,7 @@ services:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
     restart: always
+    environment:
+      - BE_API_URL=http://host.docker.internal:8080
     ports:
       - 8000:3000
-
-
