@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { CallSampleAPIButton } from "../_components/call-sample-api-button";
+import { GetLatestMessageButton } from "../_components/get-latest-message-button";
+import { PostMessageForm } from "../_components/post-message-form";
 
 export default function Home() {
   return (
@@ -41,7 +42,11 @@ export default function Home() {
       </div>
 
       <div>
-        <CallSampleAPIButton />
+        <GetLatestMessageButton />
+      </div>
+
+      <div>
+        <PostMessageForm />
       </div>
 
       <div className={styles.grid}>
